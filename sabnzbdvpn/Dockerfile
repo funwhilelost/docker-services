@@ -14,12 +14,21 @@ ENV LANG="en_US.UTF-8" \
     INCOMPLETE_DIR="/tmp/media/incomplete" \
     WATCH_DIR=""
 
+# get all essential tools first, before client software
+RUN apt-get update && apt-get install -y \
+  apt-utils \
+  software-properties-common \
+  nano \
+  git \
+  build-essential \
+  curl \
+  wget
+
 RUN apt-get update \
     && add-apt-repository ppa:jcfp/ppa \
     && add-apt-repository ppa:jcfp/sab-addons \
     && apt-get update \
-    && apt-get install -y software-properties-common nano \
-    && apt-get install -y openvpn curl sudo sabnzbdplus wget par2-tbb python-sabyenc p7zip-full locales \
+    && apt-get install -y openvpn sudo sabnzbdplus par2-tbb python-sabyenc p7zip-full locales \
     && locale-gen en_US.UTF-8 \
     && curl -sLO https://github.com/Yelp/dumb-init/releases/download/v1.2.2/dumb-init_1.2.2_amd64.deb \
     && dpkg -i dumb-init_*.deb \
