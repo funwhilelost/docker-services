@@ -10,6 +10,13 @@ if [ ! -e "/dev/random" ]; then
   ln -s /dev/urandom /dev/random
 fi
 
+if [ ! -e "/dev/net/tun" ]; then
+  # Set up TUN/TAP device
+  mkdir -p /dev/net
+  mknod /dev/net/tun c 10 200
+  chmod 600 /dev/net/tuncat /dev/net/tun
+fi
+
 echo "STARTING SABNZBD with USER ${USER_NAME}"
 
 # ENV Variables missing - fix needed
