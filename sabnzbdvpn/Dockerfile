@@ -14,7 +14,8 @@ ENV LANG="en_US.UTF-8" \
     INCOMPLETE_DIR="/tmp/media/incomplete" \
     WATCH_DIR=""
 
-RUN add-apt-repository ppa:jcfp/ppa \
+RUN apt-get update \
+    && add-apt-repository ppa:jcfp/ppa \
     && add-apt-repository ppa:jcfp/sab-addons \
     && apt-get update \
     && apt-get install -y software-properties-common nano \
